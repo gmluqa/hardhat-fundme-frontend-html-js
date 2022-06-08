@@ -19,3 +19,5 @@ yarn hardhat node
 # We now have ether to pay with
 
 # If getting nonce errors, reset metamask account in advanced settings
+
+https://youtu.be/gyMwXuJrbJQ?t=48323

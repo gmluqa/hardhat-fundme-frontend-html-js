@@ -49,12 +49,16 @@ function listenForTransactionMine(transactionResponse, provider) {
     console.log("Mining " + transactionResponse.hash + "...")
     //docs.ethers.io/v5/api/providers/provider/#Provider-once
     // provider.once is an ethers function, read docs to get more clarification or look at the module, its all there
-    provider.once(transactionResponse.hash, (transactionReceipt) => {
-        console.log(
-            "completed with " +
-                transactionReceipt.confirmations +
-                " confirmations"
-        )
+    // events, promises to order functions better, will have to research how they work more in depth
+    return new Promise((resolve, reject) => {
+        provider.once(transactionResponse.hash, (transactionReceipt) => {
+            console.log(
+                "completed with " +
+                    transactionReceipt.confirmations +
+                    " confirmations"
+            )
+            resolve()
+        })
     })
 }
 
