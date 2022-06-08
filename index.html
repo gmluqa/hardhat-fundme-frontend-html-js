@@ -11,8 +11,10 @@
         if (typeof window.ethereum !== "undefined") {
           //connection script
           await window.ethereum.request({ method: "eth_requestAccounts" });
+          document.getElementById("connectButton").innerHTML = "Connected!";
         } else {
-          console.log("No metamask detected");
+          document.getElementById("connectButton").innerHTML =
+            "Please install metamask!";
         }
       }
     </script>
