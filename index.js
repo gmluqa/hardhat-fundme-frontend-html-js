@@ -38,6 +38,7 @@ async function fund() {
             })
             //await strinctly means, WAIT for this function to fully finish, can find explanation below
             await listenForTransactionMine(transactionResponse, provider)
+            console.log("Done!!!")
         } catch (error) {
             console.log(error)
         }
