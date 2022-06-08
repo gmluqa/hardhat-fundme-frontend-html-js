@@ -7,3 +7,10 @@
 
 # point is to use users wallet and their 3rdparty node to interact with chain
 # run live server (liveserver extension in vscode)
+
+yarn hardhat node
+# in last project dir, in new terminal
+# extrapolate the contract address for FundMe "deployed at 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+
+# Also added hardhat-localhost to metamask network to metamask
+# Now const contract is synced with our hardhat-localhost node, YAY!
