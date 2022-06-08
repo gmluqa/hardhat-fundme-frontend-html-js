@@ -17,3 +17,5 @@ yarn hardhat node
 
 # Added test privatekey account0 from yarn hardhat node into metamask
 # We now have ether to pay with
+
+# If getting nonce errors, reset metamask account in advanced settings
