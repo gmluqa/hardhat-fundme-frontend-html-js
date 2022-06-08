@@ -20,7 +20,7 @@ async function connect() {
 }
 
 async function fund() {
-    const ethAmount = "77"
+    const ethAmount = "0.1"
     console.log("Funding with " + ethAmount + "...")
 
     if (typeof window.ethereum !== "undefined") {
@@ -31,10 +31,15 @@ async function fund() {
         console.log(signer)
         //need contract to interact with
         const contract = new ethers.Contract(contractAddress, abi, signer)
-        const transactionResponse = await contract.fund({
-            value: ethers.utils.parseEther(ethAmount),
-        })
-        //need ABI + interface
+        //Catching errorcodes and logging them is GOOD practice
+        try {
+            const transactionResponse = await contract.fund({
+                value: ethers.utils.parseEther(ethAmount),
+            })
+            //need ABI + interface
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
