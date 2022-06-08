@@ -36,11 +36,26 @@ async function fund() {
             const transactionResponse = await contract.fund({
                 value: ethers.utils.parseEther(ethAmount),
             })
-            //need ABI + interface
+            //await strinctly means, WAIT for this function to fully finish, can find explanation below
+            await listenForTransactionMine(transactionResponse, provider)
         } catch (error) {
             console.log(error)
         }
     }
+}
+
+// listener for transaction being mined, await is called when whole function is called above so that it proceeds line by line
+function listenForTransactionMine(transactionResponse, provider) {
+    console.log("Mining " + transactionResponse.hash + "...")
+    //docs.ethers.io/v5/api/providers/provider/#Provider-once
+    // provider.once is an ethers function, read docs to get more clarification
+    provider.once(transactionResponse.hash, (transactionReceipt) => {
+        console.log(
+            "completed with " +
+                transactionReceipt.confirmations +
+                " confirmations"
+        )
+    })
 }
 
 // withdraw function
