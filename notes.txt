@@ -14,3 +14,6 @@ yarn hardhat node
 
 # Also added hardhat-localhost to metamask network to metamask
 # Now const contract is synced with our hardhat-localhost node, YAY!
+
+# Added test privatekey account0 from yarn hardhat node into metamask
+# We now have ether to pay with
