@@ -3,11 +3,13 @@ import { ethers } from "./ethers-5.6.esm.min.js"
 import { abi, contractAddress } from "./constants.js"
 const connectButton = document.getElementById("connectButton")
 const fundButton = document.getElementById("fundButton")
+const balanceButton = document.getElementById("balanceButton")
+
 // .onclick is all lowercase, no ()
 connectButton.onclick = connect
 fundButton.onclick = fund
-console.log(ethers)
-
+// console.log(ethers)
+balanceButton.onclick = getBalance
 //https://docs.metamask.io/guide/
 async function connect() {
     if (typeof window.ethereum !== "undefined") {
@@ -16,6 +18,15 @@ async function connect() {
         connectButton.innerHTML = "Connected!"
     } else {
         connectButton.innerHTML.innerHTML = "Please install metamask!"
+    }
+}
+
+async function getBalance() {
+    if (typeof window.ethereum != "undefined") {
+        // All these native functions are explained in ethers docs
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const balance = await provider.getBalance(contractAddress)
+        console.log(ethers.utils.formatEther(balance))
     }
 }
 
