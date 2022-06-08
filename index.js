@@ -4,12 +4,14 @@ import { abi, contractAddress } from "./constants.js"
 const connectButton = document.getElementById("connectButton")
 const fundButton = document.getElementById("fundButton")
 const balanceButton = document.getElementById("balanceButton")
+const withdrawButton = document.getElementById("withdrawButton")
 
 // .onclick is all lowercase, no ()
 connectButton.onclick = connect
 fundButton.onclick = fund
 // console.log(ethers)
 balanceButton.onclick = getBalance
+withdrawButton.onclick = withdraw
 //https://docs.metamask.io/guide/
 async function connect() {
     if (typeof window.ethereum !== "undefined") {
@@ -74,4 +76,20 @@ function listenForTransactionMine(transactionResponse, provider) {
     })
 }
 
-// withdraw function
+async function withdraw() {
+    if (typeof window.ethereum !== "undefined") {
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const signer = provider.getSigner() //returns signer addr
+        //need contract to interact with
+        const contract = new ethers.Contract(contractAddress, abi, signer)
+        console.log("Withdrawing all funds...")
+        //Catching errorcodes and logging them is GOOD practice
+        try {
+            const transactionResponse = await contract.withdraw()
+            //await strinctly means, WAIT for this function to fully finish, can find explanation below
+            await listenForTransactionMine(transactionResponse, provider)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
