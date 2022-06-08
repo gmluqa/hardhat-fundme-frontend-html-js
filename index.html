@@ -8,7 +8,8 @@
     <script>
       //https://docs.metamask.io/guide/
       if (typeof window.ethereum !== "undefined") {
-        console.log("Metamask detected");
+        //connection script
+        window.ethereum.request({ method: "eth_requestAccounts" });
       } else {
         console.log("No metamask detected");
       }
