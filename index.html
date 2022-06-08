@@ -7,12 +7,15 @@
     Hello world
     <script>
       //https://docs.metamask.io/guide/
-      if (typeof window.ethereum !== "undefined") {
-        //connection script
-        window.ethereum.request({ method: "eth_requestAccounts" });
-      } else {
-        console.log("No metamask detected");
+      async function connect() {
+        if (typeof window.ethereum !== "undefined") {
+          //connection script
+          await window.ethereum.request({ method: "eth_requestAccounts" });
+        } else {
+          console.log("No metamask detected");
+        }
       }
     </script>
+    <button id="connectButton" onclick="connect()">Connect</button>
   </body>
 </html>
